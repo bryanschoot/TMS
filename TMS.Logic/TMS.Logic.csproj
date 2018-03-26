@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Logic.Interface\TMS.Logic.Interface.csproj" />
+    <ProjectReference Include="..\TMS.Repository.Interface\TMS.Repository.Interface.csproj" />
+    <ProjectReference Include="..\TMS.Respsitory\TMS.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

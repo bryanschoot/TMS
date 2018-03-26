@@ -1,0 +1,14 @@
+﻿@using TMS.Model
+@model UserViewModel
+@{
+    ViewBag.Title = "Context";
+}
+
+<h2>Context Type</h2>
+
+<ul>
+    @foreach (UserModel user in Model.users)
+    {
+        <li>@user.Firstname - @user.Lastname (@user.Age)</li>
+    }
+</ul>

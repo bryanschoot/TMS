@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Dal.Interface\TMS.Dal.Interface.csproj" />
+    <ProjectReference Include="..\TMS.Repository.Interface\TMS.Repository.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
