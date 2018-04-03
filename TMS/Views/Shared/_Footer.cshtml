@@ -1,3 +1,12 @@
-﻿<footer class="fixed-bottom bg-light py-3">
+﻿@if (@Context.Request.Path == "/Login" || @Context.Request.Path == "/Home/Error")
+{
+    <footer class="footer bg-dark py-3 text-white">
         <div class="text-center">@DateTime.Now.Year &copy; TMS</div>
-</footer>
+    </footer>
+}
+else
+{
+    <footer class="bg-dark py-3 text-white">
+        <div class="text-center">@DateTime.Now.Year &copy; TMS</div>
+    </footer>
+}

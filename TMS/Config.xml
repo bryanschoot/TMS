@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="Context" value="MSSQL"/>
+  </appSettings>
+  <connectionStrings>
+    <add name="MSSQL" connectionString="Server=mssql.fhict.local;Database=dbi388080;User Id=dbi388080;Password=388080Test123;"/>
+    <add name="ORACLE" connectionString="Server=mssql.fhict.local;Database=dbi388080;User Id=dbi388080;Password=388080Test123;"/>
+  </connectionStrings>
+</configuration>

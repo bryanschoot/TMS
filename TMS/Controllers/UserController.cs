@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using TMS.Factory;
 using TMS.Models;
 
 namespace TMS.Controllers
@@ -15,25 +15,26 @@ namespace TMS.Controllers
     public class UserController : Controller
     {
         private IConfiguration config;
-        private UserFactory factory;
+        private Factory.Factory factory;
+        UserViewModel userViewModel = new UserViewModel();
 
         public UserController(IConfiguration config)
         {
             this.config = config;
-            factory = new UserFactory(config);
+            factory = new Factory.Factory(config);
         }
 
         public IActionResult Index()
         {
-            UserViewModel viewModel = new UserViewModel();
-
             var userLogic = factory.CreateUserLogic();
-            viewModel.users = userLogic.GetAll();
+            userViewModel.users = userLogic.GetAll();
 
-            var data = config["ContextType:Type"];
-            ViewData["Context"] = data;
+            return View(userViewModel);
+        }
 
-            return View(viewModel);
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

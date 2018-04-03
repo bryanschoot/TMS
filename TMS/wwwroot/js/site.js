@@ -1,1 +1,5 @@
-﻿// Write your JavaScript code.
+﻿$(document).ready(function () {
+    setTimeout(function () {
+        $('body').addClass('loaded');
+    });
+});
