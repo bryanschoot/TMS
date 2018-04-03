@@ -9,7 +9,6 @@ namespace TMS.Repository.Interface
         T Read(int id);
         void Update(T entity);
         void Delete(T entity);
-
         IEnumerable<T> GetAll();
     }
 }

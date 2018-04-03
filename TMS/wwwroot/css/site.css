@@ -7,6 +7,9 @@
 /*#ImportRegion, Imports costum css*/
 :root {
 }
+body {
+    margin-bottom: 40px;
+}
 /*#EndImportRegion*/
 .bg-red {
     background-color: red;
