@@ -1,8 +1,14 @@
 ﻿@model TMS.Model.LoginModel
 
 @{
-    ViewData["Title"] = "Home -page";
+    ViewData["Title"] = "Login -page";
 }
+
+<ul class="position-absolute py-5">
+    <li>User: administrator@test.nl<br/>Pass: Administrator123<br/>Role: Administrator</li><br/>
+    <li>User: employee@test.nl<br/>Pass: Employee123<br/>Role: Employee</li><br/>
+    <li>User: costumer@test.nl<br/>Pass: Costumer123 <br/>Role: Costumer</li>
+</ul>
 
 <div class="container">
     <div class="row justify-content-center py-5">
@@ -25,6 +31,9 @@
                 </div>
                 <br />
                 <button type="submit" class="btn btn-outline-dark btn-block btn-lg">Aanmelden</button>
+                <br/>
+                <p><span asp-validation-for="Email" class="text-white"></span></p>
+                <p><span asp-validation-for="Password" class="text-white"></span></p>
             </form>
         </div>
     </div>

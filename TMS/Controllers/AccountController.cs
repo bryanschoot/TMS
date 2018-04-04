@@ -10,17 +10,24 @@ namespace TMS.Controllers
     public class AccountController : Controller
     {
         private Factory.Factory factory;
+        
+        [TempData]
+        public string ErrorMessage { get; set; }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(LoginModel login)
+        public async Task<IActionResult> Login(LoginModel login)
         {
-//            var accountLogic = factory.CreateAccountLogic();
-            return View("../Home/Index");
+            if (ModelState.IsValid)
+            {
+                
+            }
+            return View(login);
         }
     }
 }

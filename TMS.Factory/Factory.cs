@@ -36,11 +36,10 @@ namespace TMS.Factory
             switch (this.Context)
             {
                 case "MSSQL":
-                    new NotImplementedException();
-                    //context = new SQLDal();
+                    context = new SQLContext(context, ConnectionString);
                     break;
                 case "MEMORY":
-                    context = new UserMemory();
+                    context = new MemoryContext();
                     break;
                 default:
                     new NotImplementedException();
@@ -48,6 +47,14 @@ namespace TMS.Factory
             }
 
             return context;
+        }
+        private IAccountRepository CreateAccountRepository(IDal context)
+        {
+            IAccountRepository repository = new AccountRepository(context, this.Context);
+        }
+        private IAccountLogic CreateAccountLogic()
+        {
+            var logic = new AccountLogic(this.CreateAccountRepository(this.CreateDal()));
         }
         private IUserRepository CreateUserRepository(IDal context)
         {
