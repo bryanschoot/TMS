@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using TMS.Model;
 
-namespace TMS.Repository.Interface
+namespace TMS.Dal.Interface
 {
-    public interface IRepository<T>
+    public interface IContext<T>
     {
         IEnumerable<T> All();
         T GetById(int id);

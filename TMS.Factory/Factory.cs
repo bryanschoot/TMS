@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using TMS.Dal.Interface;
 using TMS.Dal.Memory;
+using TMS.Dal.Sql;
 using TMS.Logic;
 using TMS.Logic.Interface;
 using TMS.Repository;
@@ -15,55 +16,58 @@ namespace TMS.Factory
 {
     public class Factory
     {
-        private string ConnectionString;
-        private string Context;
-        //Reading Form Application
+        /// <summary>
+        /// The connection string and context string. Makes the connection and context string available in the rest of the class.
+        /// </summary>
+        private readonly string ConnectionString;
+        private readonly string Context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Factory"/> class from windows form application.
+        /// </summary>
         public Factory()
         {
             this.Context = ConfigurationManager.AppSettings["context"];
             this.ConnectionString = ConfigurationManager.ConnectionStrings[this.Context].ConnectionString;
         }
-        //Reading Core Application
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Factory"/> class.
+        /// </summary>
+        /// <param name="Config">
+        /// The config. Gets the config file from ASP.net Core.
+        /// </param>
         public Factory(IConfiguration Config)
         {
             this.Context = Config.GetSection("Database")["Type"];
             this.ConnectionString = Config.GetSection("ConnectionStrings")[Context];
         }
-        private IDal CreateDal()
-        {
-            IDal context = null;
 
+        /// <summary>
+        /// The create context. Context is being created at 
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IAccountContext"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        private IAccountContext CreateContext()
+        {
             switch (this.Context)
             {
-                case "MSSQL":
-                    context = new SQLContext(context, ConnectionString);
-                    break;
-                case "MEMORY":
-                    context = new MemoryContext();
-                    break;
-                default:
-                    new NotImplementedException();
-                    break;
+                case "MSSQL": return new AccountMSSQLContext(this.ConnectionString);
+                case "MEMORY": return new AccountMemoryContext();
+                default: throw new NotImplementedException();
             }
-
-            return context;
         }
-        private IAccountRepository CreateAccountRepository(IDal context)
+        private IAccountRepository CreateAccountRepository()
         {
-            IAccountRepository repository = new AccountRepository(context, this.Context);
-        }
-        private IAccountLogic CreateAccountLogic()
-        {
-            var logic = new AccountLogic(this.CreateAccountRepository(this.CreateDal()));
-        }
-        private IUserRepository CreateUserRepository(IDal context)
-        {
-            IUserRepository repository = new UserRepository(context);
+            IAccountRepository repository = new AccountRepository(this.CreateContext());
             return repository;
         }
-        public IUserLogic CreateUserLogic()
+        public IAccountLogic AccountLogic()
         {
-            var logic = new UserLogic(this.CreateUserRepository(this.CreateDal()));
+            var logic = new AccountLogic(this.CreateAccountRepository());
             return logic;
         }
     }

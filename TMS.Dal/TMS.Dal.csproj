@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Sql\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TMS.Dal.Interface\TMS.Dal.Interface.csproj" />
   </ItemGroup>
 
