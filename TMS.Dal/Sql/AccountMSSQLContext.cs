@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using TMS.Dal.Interface;
 using TMS.Model;
+using System.Data;
 
 namespace TMS.Dal.Sql
 {
+    using System;
+    using System.Data.Common;
+    using System.Data.SqlClient;
+
     public class AccountMSSQLContext : IAccountContext
     {
         private string ConnectionString { get; }
+        private string Query;
         public AccountMSSQLContext(string connstring)
         {
             this.ConnectionString = connstring;
@@ -23,7 +29,20 @@ namespace TMS.Dal.Sql
 
         public bool Exists(AccountModel entity)
         {
-            throw new System.NotImplementedException();
+            bool result = false;
+            this.Query = $"";
+            using (SqlConnection con = new SqlConnection(this.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(this.Query, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter());
+                    cmd.Parameters.Add(new SqlParameter());
+                    cmd.ExecuteNonQuery();
+                    result = true;
+                }
+
+            }
+            return result;
         }
 
         public bool Insert(AccountModel entity)

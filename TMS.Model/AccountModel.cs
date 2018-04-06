@@ -9,7 +9,7 @@ namespace TMS.Model
         [Required(ErrorMessage = "* Email is required")]
         [EmailAddress]
         public string Email { get; set; }
-        [Required(ErrorMessage = "* Password is required")]
+        [Required(ErrorMessage = "* Password is required")]///still view related not best practise
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -44,14 +44,14 @@ namespace TMS.Factory
         }
 
         /// <summary>
-        /// The create context. Context is being created at 
+        /// The create context. AccountContext is being created at 
         /// </summary>
         /// <returns>
         /// The <see cref="IAccountContext"/>.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        private IAccountContext CreateContext()
+        private IAccountContext CreateAccountContext()
         {
             switch (this.Context)
             {
@@ -60,15 +60,6 @@ namespace TMS.Factory
                 default: throw new NotImplementedException();
             }
         }
-        private IAccountRepository CreateAccountRepository()
-        {
-            IAccountRepository repository = new AccountRepository(this.CreateContext());
-            return repository;
-        }
-        public IAccountLogic AccountLogic()
-        {
-            var logic = new AccountLogic(this.CreateAccountRepository());
-            return logic;
-        }
+        public IAccountLogic AccountLogic() => new AccountLogic(new AccountRepository(this.CreateAccountContext()));
     }
 }

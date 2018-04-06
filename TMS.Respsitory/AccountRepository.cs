@@ -23,7 +23,7 @@ namespace TMS.Repository
 
         public bool Exists(AccountModel entity)
         {
-            throw new System.NotImplementedException();
+            return this.Context.Exists(entity);
         }
         public bool Insert(AccountModel entity)
         {

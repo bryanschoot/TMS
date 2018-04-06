@@ -36,7 +36,7 @@ namespace TMS.Controllers
             {
                 if (AccountLogic.CheckLogin(model))
                 {
-
+                    throw new NotImplementedException();
                 }
             }
             return View(model);
