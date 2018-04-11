@@ -23,6 +23,15 @@ namespace TMS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication("TMS").AddCookie(
+                "TMS",
+                options =>
+                    {
+                        options.LoginPath = "/Account/Login";
+                        options.LogoutPath = "/Account/Logout";
+                        options.AccessDeniedPath = "/Account/Login";
+                    });
+
             services.AddMvc();
         }
 
@@ -39,6 +48,7 @@ namespace TMS
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

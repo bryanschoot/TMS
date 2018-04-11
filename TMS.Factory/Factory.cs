@@ -40,7 +40,7 @@ namespace TMS.Factory
         public Factory(IConfiguration Config)
         {
             this.Context = Config.GetSection("Database")["Type"];
-            this.ConnectionString = Config.GetSection("ConnectionStrings")[Context];
+            this.ConnectionString = Config.GetSection("ConnectionStrings")[this.Context];
         }
 
         /// <summary>

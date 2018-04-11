@@ -29,20 +29,21 @@ namespace TMS.Dal.Sql
 
         public bool Exists(AccountModel entity)
         {
-            bool result = false;
-            this.Query = $"";
-            using (SqlConnection con = new SqlConnection(this.ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(this.Query, con))
-                {
-                    cmd.Parameters.Add(new SqlParameter());
-                    cmd.Parameters.Add(new SqlParameter());
-                    cmd.ExecuteNonQuery();
-                    result = true;
-                }
+            this.Query = $"SELECT [Email], [Password] FROM [Account] WHERE [Email]=@Email AND [Password]=@Password";
 
+            using (SqlConnection Conn = new SqlConnection(this.ConnectionString))
+            {
+                using (SqlCommand Cmd = new SqlCommand(this.Query, Conn))
+                {
+                    Conn.Open();
+
+                    Cmd.Parameters.Add(new SqlParameter("@Email", entity.Email));
+                    Cmd.Parameters.Add(new SqlParameter("@Password", entity.Password));
+                    SqlDataReader Reader = Cmd.ExecuteReader();
+
+                    return Reader.HasRows;
+                }
             }
-            return result;
         }
 
         public bool Insert(AccountModel entity)
